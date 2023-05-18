@@ -1,1 +1,3 @@
-print("hello")
+import streamlit
+
+streamlit.title("test");
