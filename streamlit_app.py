@@ -21,7 +21,7 @@ def insert_row_snowflake(new_fruit):
 
 if __name__ == "__main__":
 
-    streamlit.log(streamlit.logging.DEBUG)
+    # streamlit.log(streamlit.logging.DEBUG)
 
     streamlit.header('🥣 Breakfast Menu')
     streamlit.text(' 🥗 Omega 3 & Blueberry Oatmeal')
