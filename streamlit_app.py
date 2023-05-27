@@ -14,13 +14,14 @@ def get_fruit_load_list():
         my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
         return my_cur.fetchall()
     
-
 def insert_row_snowflake(new_fruit):
     with my_cnx.cursor() as my_cur:
         my_cur.execute(f"insert into pc_rivery_db.public.fruit_load_list values ('{new_fruit}')")
         return f"thanks for adding {new_fruit}"
 
 if __name__ == "__main__":
+
+    streamlit.log(streamlit.logging.DEBUG)
 
     streamlit.header('🥣 Breakfast Menu')
     streamlit.text(' 🥗 Omega 3 & Blueberry Oatmeal')
