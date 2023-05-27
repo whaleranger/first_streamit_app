@@ -4,7 +4,7 @@ import requests
 import snowflake.connector
 
 
-streamlit.set_log_level(st.logging.DEBUG)
+streamlit.set_log_level(streamlit.logging.DEBUG)
 
 streamlit.header('🥣 Breakfast Menu')
 streamlit.text(' 🥗 Omega 3 & Blueberry Oatmeal')
