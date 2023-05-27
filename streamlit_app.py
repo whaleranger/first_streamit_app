@@ -13,6 +13,12 @@ def get_fruit_load_list():
     with my_cnx.cursor() as my_cur:
         my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
         return my_cur.fetchall()
+    
+
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute(f"insert into pc_rivery_db.public.fruit_load_list values ('{new_fruit}')")
+        return f"thanks for adding {new_fruit}"
 
 if __name__ == "__main__":
 
@@ -45,21 +51,19 @@ if __name__ == "__main__":
     except URLError as e:
         streamlit.error()
 
-
-  
-
+    # get fruit list
     streamlit.header("the fruit load list contains:")
-
     if streamlit.button("get fruit load list"):
         # initialize my_cnx (global var) ahead of calling function that references it is necessary
         my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
         my_data_rows = get_fruit_load_list()
         streamlit.dataframe(my_data_rows)
 
+    # add fruit to snowflake
+    fruit_to_add = streamlit.text_input('What fruit would you like to add?')
+    if streamlit.button("add a new fruit"):
+        my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+        msg_from_button = insert_row_snowflake(fruit_to_add)
+        streamlit.text(msg_from_button)
 
-    streamlit.stop()
-
-    fruit_to_add = streamlit.text_input('What fruit would you like to add?', 'Jackfruit')
-    streamlit.write('Thanks for adding ', fruit_to_add)
-
-    my_cur.execute(f"insert into pc_rivery_db.public.fruit_load_list values ('from streamlit')")
+    
